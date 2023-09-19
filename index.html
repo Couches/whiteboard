@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackboard</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div id="controls">
+        <div>
+            Reset Offset:
+            <input type="button" id="resetOffset" name="resetOffset" value="Reset" />
+        </div>
+        Grid Size:
+        <div>
+            X:
+            <input type="range" id="sliderSizeX" name="sliderSizeX" min="4" max="256" value="64" />
+        </div>
+        <div>
+            Y:
+            <input type="range" id="sliderSizeY" name="sliderSizeY" min="4" max="256" value="64" />
+        </div>
+    </div>
+    <svg id="background">
+
+    </svg>
+
+    <script src="background.js"></script>
+</body>
+</html>
