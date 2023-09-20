@@ -11,7 +11,7 @@ const sliderSizeY = document.getElementById("sliderSizeY")
 
 const checkboxDragging = document.getElementById("dragging")
 
-let grid = {
+let gridSettings = {
     offsetX: 0,
     offsetY: 0,
 
@@ -19,7 +19,10 @@ let grid = {
     sizeY: 96
 }
 
-let controls = {
+let controlSettings = {
+    changeX: 0,
+    changeY: 0,
+
     deltaX: 0,
     deltaY: 0,
 
@@ -27,33 +30,41 @@ let controls = {
 }
 
 resetOffsetButton.addEventListener("click", (event) => {
-    grid.offsetX = 0.0;
-    grid.offsetY = 0.0;
+    gridSettings.offsetX = 0;
+    gridSettings.offsetY = 0;
 
-    drawGrid(canvas, offsetX, offsetY, sizeX, sizeY)
+    update()
 })
 
 sliderSizeX.addEventListener("input", (event) => {
-    sizeX = parseInt(event.target.value)
-    drawGrid(canvas, offsetX, offsetY, sizeX, sizeY)
+    gridSettings.sizeX = parseInt(event.target.value)
+    
+    drawGrid(gridContainer, gridSettings)
 })
 
 sliderSizeY.addEventListener("input", (event) => {
-    sizeY = parseInt(event.target.value)
-    drawGrid(canvas, offsetX, offsetY, sizeX, sizeY)
+    gridSettings.sizeY = parseInt(event.target.value)
+    
+    drawGrid(gridContainer, gridSettings)
 })
 
 checkboxDragging.addEventListener("change", (event) => {
-    toolObject.tool = event.target.checked ? "drag" : "none"
+    controlSettings.tool = event.target.checked ? "drag" : "none"
 })
 
+addDragListener(controlCanvas, controlSettings)
 
-
-addDragListener(controlCanvas, controls)
+drawGrid(gridContainer, gridSettings)
 
 function update()
-{
-    drawGrid(gridContainer, grid.offsetX, grid.offsetY, grid.sizeX, grid.sizeY)
+{   
+    drawGrid(gridContainer, gridSettings)
+
+    if (controlSettings.tool == "drag")
+    {
+        gridSettings.offsetX += controlSettings.deltaX
+        gridSettings.offsetY += controlSettings.deltaY
+    }
 }
 
 export { update }

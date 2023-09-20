@@ -50,31 +50,22 @@ checkboxDragging.addEventListener("change", (event) => {
 
 addDragListener(canvas, toolObject)
 
-updateGrid()
-
-
-function updateGrid()
+function drawGrid(gridContainer, gridSettings)
 {
-    drawGrid(canvas, offsetX, offsetY, sizeX, sizeY)
-}
-
-function drawGrid(gridContainer, offsetX, offsetY, sizeX, sizeY)
-{
-    // clear window
     gridContainer.innerHTML = ""
 
     let width = gridContainer.clientWidth
     let height = gridContainer.clientHeight
 
-    let numLinesX = Math.floor(width / sizeX)
-    let numLinesY = Math.floor(height / sizeY)
+    let numLinesX = Math.floor(width / gridSettings.sizeX)
+    let numLinesY = Math.floor(height / gridSettings.sizeY)
 
-    width = Math.floor(width / sizeX) * sizeX + sizeX
-    height = Math.floor(height / sizeY) * sizeY + sizeY
+    width = Math.floor(width / gridSettings.sizeX) * gridSettings.sizeX + gridSettings.sizeX
+    height = Math.floor(height / gridSettings.sizeY) * gridSettings.sizeY + gridSettings.sizeY
 
     for (let x = -1; x < numLinesX + 1; x ++)
     {        
-        let xPosition = (x * sizeX) + (offsetX % sizeX) + sizeX
+        let xPosition = (x * gridSettings.sizeX) + (gridSettings.offsetX % gridSettings.sizeX) + gridSettings.sizeX
         let path = document.createElementNS("http://www.w3.org/2000/svg", "path")
 
         path.setAttribute("d", `M ${xPosition} 0 V ${(height)}`)
@@ -86,7 +77,7 @@ function drawGrid(gridContainer, offsetX, offsetY, sizeX, sizeY)
 
     for (let y = -1; y < numLinesY + 1; y ++)
     {
-        let yPosition = (y * sizeY) + (offsetY % sizeY) + sizeY
+        let yPosition = (y * gridSettings.sizeY) + (gridSettings.offsetY % gridSettings.sizeY) + gridSettings.sizeY
         let path = document.createElementNS("http://www.w3.org/2000/svg", "path")
 
         path.setAttribute("d", `M 0 ${yPosition} H ${width}`)

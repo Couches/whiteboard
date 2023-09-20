@@ -1,10 +1,16 @@
 import { update } from "./main.js"
 
-function addDragListener(canvas, controls)
+function addDragListener(canvas, controlSettings)
 {
     canvas.addEventListener("mousedown", (event) => {
         let startX = event.clientX
         let startY = event.clientY
+
+        controlSettings.deltaX = 0
+        controlSettings.deltaY = 0
+
+        controlSettings.changeX = 0
+        controlSettings.changeY = 0
     
         let mouseMove = (event) => {
             canvas.style.cursor = "grabbing"
@@ -12,11 +18,11 @@ function addDragListener(canvas, controls)
             let deltaX = event.clientX - startX
             let deltaY = event.clientY - startY
     
-            if (controls.tool == "drag")
-            {
-                controls.deltaX += deltaX
-                controls.deltaY += deltaY
-            }
+            controlSettings.deltaX = deltaX
+            controlSettings.deltaY = deltaY
+            
+            controlSettings.changeX += deltaX
+            controlSettings.changeY += deltaY
     
             startX = event.clientX
             startY = event.clientY
@@ -35,7 +41,5 @@ function addDragListener(canvas, controls)
         canvas.addEventListener("mouseup", mouseUp)
     })
 }
-
-
 
 export { addDragListener }
