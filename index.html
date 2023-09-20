@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" 
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="HandheldFriendly" content="true" />
     <title>Blackboard</title>
     <link rel="stylesheet" href="styles.css" />
 </head>
@@ -15,17 +17,25 @@
         Grid Size:
         <div>
             X:
-            <input type="range" id="sliderSizeX" name="sliderSizeX" min="4" max="256" value="64" />
+            <input type="range" id="sliderSizeX" name="sliderSizeX" min="4" max="256" value="96" />
         </div>
         <div>
             Y:
-            <input type="range" id="sliderSizeY" name="sliderSizeY" min="4" max="256" value="64" />
+            <input type="range" id="sliderSizeY" name="sliderSizeY" min="4" max="256" value="96" />
+        </div>
+        <div>
+            Dragging:
+            <input type="checkbox" id="dragging" name="dragging" checked />
         </div>
     </div>
-    <svg id="background">
+    <div id="control-canvas">
+
+    </div>
+    <svg id="grid-container">
 
     </svg>
 
-    <script src="background.js"></script>
+    <script src="background.js" type="module"></script>
+    <script src="controls.js" type="module"></script>
 </body>
 </html>

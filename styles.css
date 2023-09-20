@@ -3,12 +3,14 @@
     padding: 0;
 }
 
-#background {
+#grid-container {
     width: 100vw;
     height: 100vh;
 
     background: #131313;
 }
+
+
 
 #controls {
     position: absolute;
@@ -26,9 +28,19 @@
     gap: 16px;
 
     border-radius: 16px;
+
+    z-index: 5;
+}
+
+#control-canvas {
+    position: absolute;
+
+    width: 100vw;
+    height: 100vh;
 }
 
 #controls div {
     display: flex;
     gap: 16px;
 }
+
