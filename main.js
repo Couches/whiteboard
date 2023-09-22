@@ -39,6 +39,7 @@ resetOffsetButton.addEventListener("click", (event) => {
 sliderSizeX.addEventListener("input", (event) => {
     gridSettings.sizeX = parseInt(event.target.value)
     
+    
     drawGrid(gridContainer, gridSettings)
 })
 

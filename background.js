@@ -1,4 +1,3 @@
-import { addDragListener } from "./controls.js"
 
 function approach(val, target, max_move) {
     if (val > target) {
@@ -8,64 +7,29 @@ function approach(val, target, max_move) {
     }
 }
 
-const canvas = document.getElementById("grid-container")
-
-const resetOffsetButton = document.getElementById("resetOffset")
-
-const sliderSizeX = document.getElementById("sliderSizeX")
-const sliderSizeY = document.getElementById("sliderSizeY")
-
-const checkboxDragging = document.getElementById("dragging")
-
-let offsetX = 0.0
-let offsetY = 0.0
-
-let sizeX = 96
-let sizeY = 96
-
-let toolObject = {
-    tool: "drag"
-}
-
-resetOffsetButton.addEventListener("click", (event) => {
-    offsetX = 0.0;
-    offsetY = 0.0;
-
-    drawGrid(canvas, offsetX, offsetY, sizeX, sizeY)
-})
-
-sliderSizeX.addEventListener("input", (event) => {
-    sizeX = parseInt(event.target.value)
-    drawGrid(canvas, offsetX, offsetY, sizeX, sizeY)
-})
-
-sliderSizeY.addEventListener("input", (event) => {
-    sizeY = parseInt(event.target.value)
-    drawGrid(canvas, offsetX, offsetY, sizeX, sizeY)
-})
-
-checkboxDragging.addEventListener("change", (event) => {
-    toolObject.tool = event.target.checked ? "drag" : "none"
-})
-
-addDragListener(canvas, toolObject)
-
 function drawGrid(gridContainer, gridSettings)
 {
+    // clear window
     gridContainer.innerHTML = ""
+
+    let sizeX = gridSettings.sizeX
+    let sizeY = gridSettings.sizeY
+
+    let offsetX = gridSettings.offsetX
+    let offsetY = gridSettings.offsetY
 
     let width = gridContainer.clientWidth
     let height = gridContainer.clientHeight
 
-    let numLinesX = Math.floor(width / gridSettings.sizeX)
-    let numLinesY = Math.floor(height / gridSettings.sizeY)
+    let numLinesX = Math.floor(width / sizeX)
+    let numLinesY = Math.floor(height / sizeY)
 
-    width = Math.floor(width / gridSettings.sizeX) * gridSettings.sizeX + gridSettings.sizeX
-    height = Math.floor(height / gridSettings.sizeY) * gridSettings.sizeY + gridSettings.sizeY
+    width = Math.floor(width / sizeX) * sizeX + sizeX
+    height = Math.floor(height / sizeY) * sizeY + sizeY
 
     for (let x = -1; x < numLinesX + 1; x ++)
     {        
-        let xPosition = (x * gridSettings.sizeX) + (gridSettings.offsetX % gridSettings.sizeX) + gridSettings.sizeX
+        let xPosition = (x * sizeX) + (offsetX % sizeX) + sizeX
         let path = document.createElementNS("http://www.w3.org/2000/svg", "path")
 
         path.setAttribute("d", `M ${xPosition} 0 V ${(height)}`)
@@ -77,7 +41,7 @@ function drawGrid(gridContainer, gridSettings)
 
     for (let y = -1; y < numLinesY + 1; y ++)
     {
-        let yPosition = (y * gridSettings.sizeY) + (gridSettings.offsetY % gridSettings.sizeY) + gridSettings.sizeY
+        let yPosition = (y * sizeY) + (offsetY % sizeY) + sizeY
         let path = document.createElementNS("http://www.w3.org/2000/svg", "path")
 
         path.setAttribute("d", `M 0 ${yPosition} H ${width}`)
@@ -86,6 +50,8 @@ function drawGrid(gridContainer, gridSettings)
         path.setAttribute("fill", "none")
         gridContainer.appendChild(path)
     }
+
+    return 
 }
 
 export { drawGrid }
