@@ -32,6 +32,10 @@ let controlSettings = {
     tool: "drag"
 }
 
+window.addEventListener("resize", (event) => {
+    drawGrid(gridContainer, gridSettings)
+})
+
 resetOffsetButton.addEventListener("click", (event) => {
     gridSettings.offsetX = 0;
     gridSettings.offsetY = 0;

@@ -37,7 +37,8 @@
     font-family: Lato;
 
     background: #ffffff;
-    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.103);
+    border: 1px solid rgb(225, 225, 225);
+    /* box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.103); */
 
     display: flex;
     flex-direction: column;
@@ -46,7 +47,7 @@
     padding: 16px;
     gap: 16px;
 
-    border-radius: 8px;
+    border-radius: 4px;
 
     z-index: 5;
 }
@@ -58,8 +59,9 @@
 }
 
 .tool-button {
-    border: 2px solid darkgray;
-    border-radius: 8px;
+    border: 1px solid rgb(225, 225, 225);
+    background: #f8f8f8;
+    border-radius: 4px;
 
     box-sizing: border-box;
     padding: 4px;
@@ -67,7 +69,12 @@
 }
 
 .tool-button:hover {
-    background-color: darkgray;
-    color: white;
+    border: 1px solid rgb(45, 45, 45);
     font-weight: bold;
+
+    cursor: pointer;
+}
+
+.tool-button {
+    transition: 0.2s;
 }
