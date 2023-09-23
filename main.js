@@ -9,7 +9,10 @@ const resetOffsetButton = document.getElementById("resetOffset")
 const sliderSizeX = document.getElementById("sliderSizeX")
 const sliderSizeY = document.getElementById("sliderSizeY")
 
-const checkboxDragging = document.getElementById("dragging")
+const toolText = document.getElementById("toolText")
+const buttonDragging = document.getElementById("buttonDrag")
+const buttonDrawing = document.getElementById("buttonDraw")
+const buttonErasing = document.getElementById("buttonErase")
 
 let gridSettings = {
     offsetX: 0,
@@ -49,13 +52,29 @@ sliderSizeY.addEventListener("input", (event) => {
     drawGrid(gridContainer, gridSettings)
 })
 
-checkboxDragging.addEventListener("change", (event) => {
-    controlSettings.tool = event.target.checked ? "drag" : "none"
+// Buttons
+buttonDragging.addEventListener("click", (event) => {
+    swapTool("drag")
+})
+
+buttonDrawing.addEventListener("click", (event) => {
+    swapTool("draw")
+})
+
+buttonErasing.addEventListener("click", (event) => {
+    swapTool("erase")
 })
 
 addDragListener(controlCanvas, controlSettings)
 
+swapTool("drag")
 drawGrid(gridContainer, gridSettings)
+
+function swapTool(tool)
+{
+    controlSettings.tool = tool
+    toolText.innerText = tool
+}
 
 function update()
 {   

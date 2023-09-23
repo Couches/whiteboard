@@ -5,14 +5,14 @@
     <meta name="viewport" 
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta name="HandheldFriendly" content="true" />
-    <title>Blackboard</title>
+    <title>Whiteboard</title>
     <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
     <div id="controls">
         <div>
             Reset Offset:
-            <input type="button" id="resetOffset" name="resetOffset" value="Reset" />
+            <input type="button" id="resetOffset" class="tool-button" name="resetOffset" value="Reset" />
         </div>
         Grid Size:
         <div>
@@ -24,13 +24,22 @@
             <input type="range" id="sliderSizeY" name="sliderSizeY" min="4" max="256" value="96" />
         </div>
         <div>
-            Dragging:
-            <input type="checkbox" id="dragging" name="dragging" checked />
+            Tool:
+            <span id="toolText"></span>
+        </div>
+        <div>
+            
+            <input type="button" id="buttonDrag" class="tool-button" name="buttonDragging" value="Drag" />
+            <input type="button" id="buttonDraw" class="tool-button" name="buttonDraw" value="Draw" />
+            <input type="button" id="buttonErase" class="tool-button" name="buttonErase" value="Erase" />
         </div>
     </div>
     <div id="control-canvas">
 
     </div>
+    <svg id="pen-container">
+        
+    </svg>
     <svg id="grid-container">
 
     </svg>
