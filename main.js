@@ -1,8 +1,10 @@
 import { drawGrid } from "./background.js"
 import { addDragListener } from "./controls.js"
+import { drawLine } from "./pen.js"
 
 const controlCanvas = document.getElementById("control-canvas")
 const gridContainer = document.getElementById("grid-container")
+const penContainer = document.getElementById("pen-container")
 
 const resetOffsetButton = document.getElementById("resetOffset")
 
@@ -23,6 +25,9 @@ let gridSettings = {
 }
 
 let controlSettings = {
+    startX: 0,
+    startY: 0,
+
     changeX: 0,
     changeY: 0,
 
@@ -41,19 +46,6 @@ resetOffsetButton.addEventListener("click", (event) => {
     gridSettings.offsetY = 0;
 
     update()
-})
-
-sliderSizeX.addEventListener("input", (event) => {
-    gridSettings.sizeX = parseInt(event.target.value)
-    
-    
-    drawGrid(gridContainer, gridSettings)
-})
-
-sliderSizeY.addEventListener("input", (event) => {
-    gridSettings.sizeY = parseInt(event.target.value)
-    
-    drawGrid(gridContainer, gridSettings)
 })
 
 // Buttons
@@ -76,8 +68,25 @@ drawGrid(gridContainer, gridSettings)
 
 function swapTool(tool)
 {
+    buttonDragging.classList.remove("selected")
+    buttonDrawing.classList.remove("selected")
+    buttonErasing.classList.remove("selected")
+
+    switch (tool)
+    {
+        case "drag":
+            buttonDragging.classList.add("selected")
+            break;
+        case "draw":
+            buttonDrawing.classList.add("selected")
+            break;
+        case "erase":
+            buttonErasing.classList.add("selected")
+            break;
+    }
+
     controlSettings.tool = tool
-    toolText.innerText = tool
+    // toolText.innerText = tool
 }
 
 function update()
@@ -88,6 +97,12 @@ function update()
     {
         gridSettings.offsetX += controlSettings.deltaX
         gridSettings.offsetY += controlSettings.deltaY
+    }
+
+    if (controlSettings.tool == "draw")
+    {
+        //console.log(controlSettings.drawing, controlSettings.startX, controlSettings.startY, controlSettings.changeX, controlSettings.changeY)
+        drawLine(penContainer, controlSettings)
     }
 }
 

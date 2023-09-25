@@ -9,31 +9,18 @@
     <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div id="controls">
-        <div>
+    <div id="controls-container">
+        <div id="settings-bar">
             Reset Offset:
-            <input type="button" id="resetOffset" class="tool-button" name="resetOffset" value="Reset" />
+            <input type="button" id="resetOffset" class="button" name="resetOffset" value="Reset" />
         </div>
-        Grid Size:
-        <div>
-            X:
-            <input type="range" id="sliderSizeX" class="slider" name="sliderSizeX" min="4" max="256" value="96" />
-        </div>
-        <div>
-            Y:
-            <input type="range" id="sliderSizeY" class="slider" name="sliderSizeY" min="4" max="256" value="96" />
-        </div>
-        <div>
-            Tool:
-            <span id="toolText"></span>
-        </div>
-        <div>
-            
-            <input type="button" id="buttonDrag" class="tool-button" name="buttonDragging" value="Drag" />
-            <input type="button" id="buttonDraw" class="tool-button" name="buttonDraw" value="Draw" />
-            <input type="button" id="buttonErase" class="tool-button" name="buttonErase" value="Erase" />
+        <div id="tool-bar">
+            <button id="buttonDrag" class="button tool-button"><img src="grab.svg" width="24px"></button>
+            <button id="buttonDraw" class="button tool-button"><img src="draw.svg" width="24px"></button>
+            <button id="buttonErase" class="button tool-button"><img src="erase.svg" width="24px"></button>
         </div>
     </div>
+    
     <div id="control-canvas">
 
     </div>
@@ -48,5 +35,6 @@
     <script src="background.js" type="module"></script>
     <script src="controls.js" type="module"></script>
     <script src="main.js" type="module"></script>
+    <script src="pen.js" type="module"></script>
 </body>
 </html>

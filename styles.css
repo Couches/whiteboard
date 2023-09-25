@@ -5,6 +5,15 @@
     padding: 0;
 }
 
+#controls-container {
+    pointer-events: none;
+
+    position: absolute;
+
+    width: 100vw;
+    height: 100vh;
+}
+
 #control-canvas {
     position: absolute;
 
@@ -21,55 +30,90 @@
     height: 100vh;
 
     background: none;
+
+    z-index: 3;
 }
 
 #grid-container {
+    position: absolute;
+
     width: 100vw;
     height: 100vh;
 
     background: #f8f8f8;
 }
 
+#settings-bar {
+    z-index: 5;
 
-#controls {
     position: absolute;
 
-    font-family: Lato;
+    pointer-events: all;
+}
 
-    background: #ffffff;
-    border: 1px solid rgb(225, 225, 225);
-    /* box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.103); */
+#tool-bar {
+    pointer-events: all;
+
+    z-index: 5;
+
+    position: absolute;
+
+    background: white;
+    border: 2px solid black;
+    border-radius: 12px;
+    padding: 8px;
 
     display: flex;
     flex-direction: column;
+    gap: 10px;
 
-    margin: 16px;
-    padding: 16px;
-    gap: 16px;
+    top: 50%;
+    transform: translate(20%, -50%);
 
-    border-radius: 4px;
-
-    z-index: 5;
+    box-shadow: 0px 0px 8px rgb(187, 187, 187);
 }
 
-#controls div {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-.tool-button {
-    border: 1px solid rgb(225, 225, 225);
+.button {
+    border: 2px solid rgb(225, 225, 225);
     background: #f8f8f8;
     border-radius: 4px;
 
     box-sizing: border-box;
     padding: 4px;
-    width: 64px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.tool-button:hover {
-    border: 1px solid rgb(45, 45, 45);
+.button img {
+    opacity: 0.4;
+
+    transition: 0.2s;
+}
+
+.tool-button {
+    width: 48px;
+    height: 48px;
+}
+
+.tool-button.selected {
+    border: 2px solid black;
+    box-shadow: 0px 0px 8px rgb(187, 187, 187);
+    font-weight: bold;
+    transform: scale(1.05);
+}
+
+.tool-button.selected img {
+    opacity: 1.0;
+}
+
+.tool-button:hover img {
+    opacity: 1.0;
+}
+
+.button:hover {
+    border: 2px solid rgb(45, 45, 45);
     font-weight: bold;
 
     cursor: pointer;

@@ -6,35 +6,45 @@ function addDragListener(canvas, controlSettings)
         let startX = event.clientX
         let startY = event.clientY
 
+        controlSettings.startX = startX
+        controlSettings.startY = startY
+
         controlSettings.deltaX = 0
         controlSettings.deltaY = 0
 
         controlSettings.changeX = 0
         controlSettings.changeY = 0
+
+        controlSettings.drawing = true
     
         let mouseMove = (event) => {
-            canvas.style.cursor = "grabbing"
     
             let deltaX = event.clientX - startX
             let deltaY = event.clientY - startY
     
+            startX = event.clientX
+            startY = event.clientY
+
             controlSettings.deltaX = deltaX
             controlSettings.deltaY = deltaY
             
             controlSettings.changeX += deltaX
             controlSettings.changeY += deltaY
     
-            startX = event.clientX
-            startY = event.clientY
+            
     
             update()
         }
     
         let mouseUp = (event) => {
             canvas.style.cursor = "default"
+
+            controlSettings.drawing = false
     
             canvas.removeEventListener("mousemove", mouseMove)
             canvas.removeEventListener("mouseup", mouseUp)
+
+            update()
         }
     
         canvas.addEventListener("mousemove", mouseMove)
