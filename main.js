@@ -1,6 +1,6 @@
 import { drawGrid } from "./background.js"
 import { addDragListener } from "./controls.js"
-import { drawLine } from "./pen.js"
+import { drawLine, renderAllLines } from "./pen.js"
 
 const controlCanvas = document.getElementById("control-canvas")
 const gridContainer = document.getElementById("grid-container")
@@ -14,7 +14,7 @@ const sliderSizeY = document.getElementById("sliderSizeY")
 const toolText = document.getElementById("toolText")
 const buttonDragging = document.getElementById("buttonDrag")
 const buttonDrawing = document.getElementById("buttonDraw")
-const buttonErasing = document.getElementById("buttonErase")
+// const buttonErasing = document.getElementById("buttonErase")
 
 let gridSettings = {
     offsetX: 0,
@@ -57,9 +57,9 @@ buttonDrawing.addEventListener("click", (event) => {
     swapTool("draw")
 })
 
-buttonErasing.addEventListener("click", (event) => {
-    swapTool("erase")
-})
+// buttonErasing.addEventListener("click", (event) => {
+//     swapTool("erase")
+// })
 
 addDragListener(controlCanvas, controlSettings)
 
@@ -70,7 +70,7 @@ function swapTool(tool)
 {
     buttonDragging.classList.remove("selected")
     buttonDrawing.classList.remove("selected")
-    buttonErasing.classList.remove("selected")
+    // buttonErasing.classList.remove("selected")
 
     switch (tool)
     {
@@ -80,9 +80,9 @@ function swapTool(tool)
         case "draw":
             buttonDrawing.classList.add("selected")
             break;
-        case "erase":
-            buttonErasing.classList.add("selected")
-            break;
+        // case "erase":
+        //     buttonErasing.classList.add("selected")
+        //     break;
     }
 
     controlSettings.tool = tool
@@ -92,17 +92,22 @@ function swapTool(tool)
 function update()
 {   
     drawGrid(gridContainer, gridSettings)
+    
+
+    
+
+    if (controlSettings.tool == "draw")
+    {
+        //console.log(controlSettings.drawing, controlSettings.startX, controlSettings.startY, controlSettings.changeX, controlSettings.changeY)
+        drawLine(penContainer, controlSettings, gridSettings)
+    }
 
     if (controlSettings.tool == "drag")
     {
         gridSettings.offsetX += controlSettings.deltaX
         gridSettings.offsetY += controlSettings.deltaY
-    }
 
-    if (controlSettings.tool == "draw")
-    {
-        //console.log(controlSettings.drawing, controlSettings.startX, controlSettings.startY, controlSettings.changeX, controlSettings.changeY)
-        drawLine(penContainer, controlSettings)
+        renderAllLines(gridSettings)
     }
 }
 

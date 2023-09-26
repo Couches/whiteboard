@@ -44,6 +44,8 @@
 }
 
 #settings-bar {
+    display: none;
+
     z-index: 5;
 
     position: absolute;
